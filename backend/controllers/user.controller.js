@@ -74,7 +74,13 @@ const loginUser = asyncHandler( async (req, res) => {
 // Get /api/users/me
 // @access Private
 const getLoggedUser = asyncHandler( async (req, res) => {
-    res.json({message : 'User Data display'})
+    const {_id, name, email} = await User.findById(req.user.id)
+    res.status(200).json({
+        id:_id,
+        name,
+        email,
+    })
+    // res.json({message : 'User Data display'})
 })
 
 // generate token
